@@ -2,20 +2,26 @@
 
 This module contains commands to send an email based on the available templates.
 
-## List templates
+## Install
+
+    composer require ubermanu/magento2-email
+
+## Usage
+
+### List templates
 
     bin/magento email:list
 
-Returns the list of available emails.
+> Returns the list of available emails.
 
-## Send an email
+### Send an email
 
     bin/magento email:send \
         --template customer_create_account_email_template \
         --store 0 \
         test@domain.com
 
-Generate an email template and send it.
+> Generate an email template and send it.
 
 ## Notes
 
