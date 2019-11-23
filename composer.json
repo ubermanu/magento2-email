@@ -1,0 +1,32 @@
+{
+  "name": "ubermanu/magento2-email",
+  "description": "Command line tool to test Magento 2 email templates",
+  "type": "magento2-module",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "name": "Emmanuel Vodor",
+      "email": "manu@paca.happy-dev.fr"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  ],
+  "require": {
+    "php": "~5.6.0|~7.0.0",
+    "magento/module-email": "101.0.*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ubermanu\\Email\\": ""
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
