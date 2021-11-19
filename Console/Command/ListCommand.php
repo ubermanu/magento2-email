@@ -3,6 +3,7 @@
 namespace Ubermanu\Email\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -37,8 +38,23 @@ class ListCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $table = new Table($output);
+        $table->setHeaders(['Identifier', 'Title', 'Module']);
+        $count = 0;
+
         foreach ($this->_emailConfig->getAvailableTemplates() as $template) {
-            $output->writeln(sprintf('<info>%s</info>: %s', $template['value'], $template['label']));
+            $table->addRow([
+                $template['value'],
+                $template['label'],
+                $template['group']
+            ]);
+            $count++;
+        }
+
+        if ($count) {
+            $table->render();
+        } else {
+            $output->writeln('No email templates found.');
         }
     }
 }
