@@ -1,6 +1,6 @@
 {
   "name": "ubermanu/magento2-email",
-  "description": "Command line tool to test Magento 2 email templates",
+  "description": "Command line tool to send Magento 2 email templates",
   "type": "magento2-module",
   "license": "OSL-3.0",
   "authors": [
@@ -16,8 +16,8 @@
     }
   ],
   "require": {
-    "php": "~5.6.0|~7.0.0",
-    "magento/module-email": "101.0.*"
+    "php": "~5.6|~7.0|~8.0",
+    "magento/module-email": ">=100 <102"
   },
   "autoload": {
     "files": [
