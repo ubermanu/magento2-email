@@ -1,4 +1,4 @@
-# Email testing
+# Magento 2 - Email testing
 
 This module contains commands to send an email based on the available templates.
 
