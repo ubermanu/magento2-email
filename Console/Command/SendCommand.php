@@ -78,6 +78,13 @@ class SendCommand extends Command
             Store::DEFAULT_STORE_ID
         );
 
+        $this->addOption(
+            'vars',
+            'i',
+            InputOption::VALUE_OPTIONAL,
+            'File that contains the variables to inject into the template (YAML)'
+        );
+
         $this->addArgument(
             'email',
             InputArgument::REQUIRED,
@@ -101,7 +108,15 @@ class SendCommand extends Command
         $storeId = $input->getOption('store');
         $receiverEmail = $input->getArgument('email');
 
-        // TODO: Load variables from external json file?
+        $variables = [];
+
+        if ($input->getOption('vars')) {
+            try {
+                $variables = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($input->getOption('vars')));
+            } catch (\Symfony\Component\Yaml\Exception\ParseException $e) {
+                throw new LocalizedException(__('Error parsing variables file: %1', [$e->getMessage()]));
+            }
+        }
 
         Phrase::setRenderer($this->_phraseRenderer);
 
@@ -113,7 +128,7 @@ class SendCommand extends Command
                     'store' => $storeId,
                 ]
             )
-            ->setTemplateVars([])
+            ->setTemplateVars($variables)
             ->addTo($receiverEmail);
 
         $template->getTransport()->sendMessage();

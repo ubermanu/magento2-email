@@ -76,6 +76,13 @@ class DumpCommand extends Command
             'Store ID',
             Store::DEFAULT_STORE_ID
         );
+
+        $this->addOption(
+            'vars',
+            'i',
+            InputOption::VALUE_OPTIONAL,
+            'File that contains the variables to inject into the template (YAML)'
+        );
     }
 
     /**
@@ -93,7 +100,15 @@ class DumpCommand extends Command
         $templateId = $input->getOption('template');
         $storeId = $input->getOption('store');
 
-        // TODO: Load variables from external json file?
+        $variables = [];
+
+        if ($input->getOption('vars')) {
+            try {
+                $variables = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($input->getOption('vars')));
+            } catch (\Symfony\Component\Yaml\Exception\ParseException $e) {
+                throw new LocalizedException(__('Error parsing variables file: %1', [$e->getMessage()]));
+            }
+        }
 
         Phrase::setRenderer($this->_phraseRenderer);
 
@@ -105,7 +120,7 @@ class DumpCommand extends Command
                     'store' => $storeId,
                 ]
             )
-            ->setVars([]);
+            ->setVars($variables);
 
         echo $template->processTemplate();
     }
