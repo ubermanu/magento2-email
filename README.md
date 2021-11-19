@@ -19,6 +19,27 @@ Generate an email template and send it:
         --store 0 \
         test@domain.com
 
+## Variables
+
+It is possible to inject variables in the generated email using a YAML file.
+
+For example:
+
+```yaml
+customer:
+  id: 1
+  name: John Doe
+  email: john@example.com
+store:
+  frontend_name: Magento Store
+```
+
+And use this data in the email:
+
+    bin/magento email:send \
+        --template customer_create_account_email_template \
+        --vars variables.yaml
+
 ## Notes
 
 The email should be translated according to the given store language.
