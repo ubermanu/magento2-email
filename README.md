@@ -24,4 +24,4 @@ Generate an email template and send it:
 The email should be translated according to the given store language.
 
 It's not possible to send an email with frontend compilation enabled.<br>
-`Emogrifier` won't be able to parse the generated HTML if it's not properly compiled to CSS first.
+[Emogrifier](https://github.com/MyIntervals/emogrifier) won't be able to parse the generated HTML if it's not properly compiled to CSS first.
