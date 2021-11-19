@@ -5,16 +5,10 @@ namespace Ubermanu\Email\Console\Command;
 use Magento\Framework\Phrase;
 use Magento\Store\Model\Store;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class DumpCommand
- *
- * @package Ubermanu\Email\Console\Command
- */
 class DumpCommand extends Command
 {
     /**
@@ -42,16 +36,6 @@ class DumpCommand extends Command
      */
     protected $_emailConfig;
 
-    /**
-     * DumpCommand constructor.
-     *
-     * @param \Magento\Framework\App\State $state
-     * @param \Magento\Framework\Phrase\RendererInterface $phraseRenderer
-     * @param \Magento\Framework\Mail\Template\FactoryInterface $templateFactory
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Email\Model\Template\Config $emailConfig
-     * @param string $name
-     */
     public function __construct(
         \Magento\Framework\App\State $state,
         \Magento\Framework\Phrase\RendererInterface $phraseRenderer,

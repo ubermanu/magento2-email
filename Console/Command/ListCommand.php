@@ -6,11 +6,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ListCommand
- *
- * @package Ubermanu\Email\Console\Command
- */
 class ListCommand extends Command
 {
     /**
@@ -18,12 +13,6 @@ class ListCommand extends Command
      */
     protected $_emailConfig;
 
-    /**
-     * ListCommand constructor.
-     *
-     * @param \Magento\Email\Model\Template\Config $emailConfig
-     * @param null                                 $name
-     */
     public function __construct(
         \Magento\Email\Model\Template\Config $emailConfig,
         $name = null

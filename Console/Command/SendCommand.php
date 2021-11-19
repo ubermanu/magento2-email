@@ -10,11 +10,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class SendCommand
- *
- * @package Ubermanu\Email\Console\Command
- */
 class SendCommand extends Command
 {
     /**
@@ -42,16 +37,6 @@ class SendCommand extends Command
      */
     protected $_emailConfig;
 
-    /**
-     * SendCommand constructor.
-     *
-     * @param \Magento\Framework\App\State                       $state
-     * @param \Magento\Framework\Phrase\RendererInterface        $phraseRenderer
-     * @param \Magento\Framework\Mail\Template\TransportBuilder  $transportBuilder
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Email\Model\Template\Config               $emailConfig
-     * @param string                                             $name
-     */
     public function __construct(
         \Magento\Framework\App\State $state,
         \Magento\Framework\Phrase\RendererInterface $phraseRenderer,
@@ -127,9 +112,9 @@ class SendCommand extends Command
      * Generate template.
      *
      * @param string $templateId
-     * @param array  $templateVariables
+     * @param array $templateVariables
      * @param string $receiverEmail
-     * @param int    $storeId
+     * @param int $storeId
      *
      * @return \Magento\Framework\Mail\Template\TransportBuilder
      */
