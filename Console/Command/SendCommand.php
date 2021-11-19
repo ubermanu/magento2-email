@@ -65,7 +65,7 @@ class SendCommand extends Command
             'template',
             't',
             InputOption::VALUE_REQUIRED,
-            'Template name to generate'
+            'Email template identifier'
         );
 
         $this->addOption(
@@ -93,7 +93,8 @@ class SendCommand extends Command
         $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
 
         if ($this->_scopeConfig->getValue('dev/front_end_development_workflow/type') === 'client_side_compilation') {
-            return $output->writeln('<error>Please disable the frontend compilation before sending an email.</error>');
+            $output->writeln('<error>Please disable the frontend compilation before sending an email.</error>');
+            return;
         }
 
         $templateId = $input->getOption('template');
@@ -104,30 +105,17 @@ class SendCommand extends Command
 
         Phrase::setRenderer($this->_phraseRenderer);
 
-        $template = $this->generateTemplate($templateId, [], $receiverEmail, $storeId);
-        $template->getTransport()->sendMessage();
-    }
-
-    /**
-     * Generate template.
-     *
-     * @param string $templateId
-     * @param array $templateVariables
-     * @param string $receiverEmail
-     * @param int $storeId
-     *
-     * @return \Magento\Framework\Mail\Template\TransportBuilder
-     */
-    public function generateTemplate($templateId, $templateVariables, $receiverEmail, $storeId)
-    {
-        return $this->_transportBuilder->setTemplateIdentifier($templateId)
+        $template = $this->_transportBuilder
+            ->setTemplateIdentifier($templateId)
             ->setTemplateOptions(
                 [
                     'area' => $this->_emailConfig->getTemplateArea($templateId),
                     'store' => $storeId,
                 ]
             )
-            ->setTemplateVars($templateVariables)
+            ->setTemplateVars([])
             ->addTo($receiverEmail);
+
+        $template->getTransport()->sendMessage();
     }
 }

@@ -64,7 +64,7 @@ class DumpCommand extends Command
             'template',
             't',
             InputOption::VALUE_REQUIRED,
-            'Template name to generate'
+            'Email template identifier'
         );
 
         $this->addOption(
@@ -86,7 +86,8 @@ class DumpCommand extends Command
         $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
 
         if ($this->_scopeConfig->getValue('dev/front_end_development_workflow/type') === 'client_side_compilation') {
-            return $output->writeln('<error>Please disable the frontend compilation before sending an email.</error>');
+            $output->writeln('<error>Please disable the frontend compilation before sending an email.</error>');
+            return;
         }
 
         $templateId = $input->getOption('template');
@@ -96,22 +97,7 @@ class DumpCommand extends Command
 
         Phrase::setRenderer($this->_phraseRenderer);
 
-        $template = $this->generateTemplate($templateId, [], $storeId);
-        echo $template->processTemplate();
-    }
-
-    /**
-     * Generate template.
-     *
-     * @param string $templateId
-     * @param array $templateVariables
-     * @param int $storeId
-     *
-     * @return \Magento\Framework\Mail\TemplateInterface
-     */
-    public function generateTemplate($templateId, $templateVariables, $storeId)
-    {
-        return $this->_templateFactory
+        $template = $this->_templateFactory
             ->get($templateId)
             ->setOptions(
                 [
@@ -119,6 +105,8 @@ class DumpCommand extends Command
                     'store' => $storeId,
                 ]
             )
-            ->setVars($templateVariables);
+            ->setVars([]);
+
+        echo $template->processTemplate();
     }
 }
