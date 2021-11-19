@@ -83,8 +83,6 @@ class SendCommand extends Command
             InputArgument::REQUIRED,
             'The email address of the receiver'
         );
-
-        parent::configure();
     }
 
     /**

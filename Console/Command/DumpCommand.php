@@ -76,8 +76,6 @@ class DumpCommand extends Command
             'Store ID',
             Store::DEFAULT_STORE_ID
         );
-
-        parent::configure();
     }
 
     /**

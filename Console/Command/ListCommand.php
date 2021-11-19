@@ -36,8 +36,6 @@ class ListCommand extends Command
             InputArgument::OPTIONAL,
             'Filter the list by template identifier'
         );
-
-        parent::configure();
     }
 
     /**
