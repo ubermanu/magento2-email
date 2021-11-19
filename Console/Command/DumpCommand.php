@@ -2,6 +2,8 @@
 
 namespace Ubermanu\Email\Console\Command;
 
+use Magento\Developer\Model\Config\Source\WorkflowType;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 use Magento\Store\Model\Store;
 use Symfony\Component\Console\Command\Command;
@@ -58,7 +60,7 @@ class DumpCommand extends Command
     protected function configure()
     {
         $this->setName('email:dump');
-        $this->setDescription('Dump a transactional email template.');
+        $this->setDescription('Dump the content of a transactional email template');
 
         $this->addOption(
             'template',
@@ -80,14 +82,14 @@ class DumpCommand extends Command
 
     /**
      * @inheritdoc
+     * @throws LocalizedException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
 
-        if ($this->_scopeConfig->getValue('dev/front_end_development_workflow/type') === 'client_side_compilation') {
-            $output->writeln('<error>Please disable the frontend compilation before sending an email.</error>');
-            return;
+        if ($this->_scopeConfig->getValue(WorkflowType::CONFIG_NAME_PATH) === WorkflowType::CLIENT_SIDE_COMPILATION) {
+            throw new LocalizedException(__('Client side compilation is not supported for this command.'));
         }
 
         $templateId = $input->getOption('template');
