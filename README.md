@@ -1,6 +1,6 @@
 # Magento 2 - Email testing
 
-This module contains commands to send an email based on the available templates.
+Console commands to generate an email based on the available templates.
 
 ## Install
 
@@ -10,18 +10,18 @@ This module contains commands to send an email based on the available templates.
 
 List the available email templates:
 
-    bin/magento email:list
+    php bin/magento email:list
 
 Generate an email and send it:
 
-    bin/magento email:send \
+    php bin/magento email:send \
         --template customer_create_account_email_template \
         --store 0 \
         test@domain.com
 
 Generate an email and dump its content:
 
-    bin/magento email:dump \
+    php bin/magento email:dump \
         --template customer_create_account_email_template \
         --store 0
 
@@ -42,7 +42,7 @@ store:
 
 And use this data in the email:
 
-    bin/magento email:send \
+    php bin/magento email:send \
         --template customer_create_account_email_template \
         --vars variables.yaml \
         test@domain.com
