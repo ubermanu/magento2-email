@@ -8,16 +8,22 @@ This module contains commands to send an email based on the available templates.
 
 ## Usage
 
-Returns a list of available email templates:
+List the available email templates:
 
     bin/magento email:list
 
-Generate an email template and send it:
+Generate an email and send it:
 
     bin/magento email:send \
         --template customer_create_account_email_template \
         --store 0 \
         test@domain.com
+
+Generate an email and dump its content:
+
+    bin/magento email:dump \
+        --template customer_create_account_email_template \
+        --store 0
 
 ## Variables
 
@@ -38,7 +44,8 @@ And use this data in the email:
 
     bin/magento email:send \
         --template customer_create_account_email_template \
-        --vars variables.yaml
+        --vars variables.yaml \
+        test@domain.com
 
 ## Notes
 
