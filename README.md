@@ -36,8 +36,6 @@ customer:
   id: 1
   name: John Doe
   email: john@example.com
-store:
-  frontend_name: Magento Store
 ```
 
 And use this data in the email:
