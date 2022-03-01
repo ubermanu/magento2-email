@@ -36,6 +36,7 @@ customer:
   id: 1
   name: John Doe
   email: john@example.com
+  rp_token: 123456789
 ```
 
 And use this data in the email:
