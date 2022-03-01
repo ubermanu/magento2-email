@@ -128,6 +128,7 @@ class SendCommand extends Command
                     'store' => $storeId,
                 ]
             )
+            ->setFromByScope('general', $storeId)
             ->setTemplateVars($variables)
             ->addTo($receiverEmail);
 
