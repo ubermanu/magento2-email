@@ -11,7 +11,7 @@
     ],
     "require": {
         "magento/module-email": ">=100 <102",
-        "symfony/yaml": "^5.3"
+        "symfony/yaml": ">= 4"
     },
     "autoload": {
         "files": [
